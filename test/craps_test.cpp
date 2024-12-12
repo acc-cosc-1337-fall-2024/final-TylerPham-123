@@ -2,7 +2,6 @@
 #include "catch.hpp"
 
 #include "die.h"
-#include <cassert>
 
 TEST_CASE("Verify Test Configuration", "verification")
 {
@@ -13,9 +12,9 @@ TEST_CASE("DieTest, RollInRange")
 {
     Die die;
     for (int i = 0; i < 10; ++i)
-	{
+    {
         int roll = die.roll();
-		REQUIRE(roll >= 1);
+        REQUIRE(roll >= 1);
         REQUIRE(roll <= 6);
     }
 }
