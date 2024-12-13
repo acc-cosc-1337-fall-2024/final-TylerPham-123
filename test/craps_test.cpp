@@ -47,6 +47,26 @@ TEST_CASE("ShooterTest, ThrowDice") {
         REQUIRE(rollValue <= 12);
         delete roll;
     }
+
+    // Test if the `rolls` vector stores the correct number of rolls
+    shooter.throw_dice();
+    shooter.throw_dice();
+    shooter.throw_dice();
+    REQUIRE(shooter.getRolls().size() == 3);
+
+    // Test the `display_rolled_values()` method (more complex testing might be needed)
+    std::stringstream output;
+    std::streambuf* old_cout = std::cout.rdbuf();
+    std::cout.rdbuf(output.rdbuf());
+
+    shooter.display_rolled_values();
+
+    // Adjust the expected output based on the actual rolls
+    std::string expected_output = "4 9 6 "; // Replace with actual values
+    REQUIRE(output.str() == expected_output);
+
+    // Restore the original output stream
+    std::cout.rdbuf(old_cout);
 }
 
 #include "come_out_phase.h"

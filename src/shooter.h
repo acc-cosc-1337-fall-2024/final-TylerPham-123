@@ -23,6 +23,10 @@ public:
         std::cout << std::endl;
     }
 
+    const std::vector<Roll*>& getRolls() const {
+        return rolls;
+    }
+
     ~Shooter() {
         for (Roll* roll : rolls) {
             delete roll;
