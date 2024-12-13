@@ -48,3 +48,42 @@ TEST_CASE("ShooterTest, ThrowDice") {
         delete roll;
     }
 }
+
+#include "come_out_phase.h"
+#include "point_phase.h"
+
+TEST_CASE("PhaseTest, ComeOutPhaseTest") {
+    ComeOutPhase comeOutPhase;
+    Die die1, die2;
+    Roll roll(die1, die2);
+
+    // Test natural
+    roll.roll_dice();
+    REQUIRE(comeOutPhase.get_outcome(roll) == RollOutcome::natural);
+
+    // Test craps
+    roll.roll_dice();
+    REQUIRE(comeOutPhase.get_outcome(roll) == RollOutcome::craps);
+
+    // Test point
+    roll.roll_dice();
+    REQUIRE(comeOutPhase.get_outcome(roll) == RollOutcome::point);
+}
+
+TEST_CASE("PhaseTest, PointPhaseTest") {
+    PointPhase pointPhase(6);
+    Die die1, die2;
+    Roll roll(die1, die2);
+
+    // Test point
+    roll.roll_dice();
+    REQUIRE(pointPhase.get_outcome(roll) == RollOutcome::point);
+
+    // Test seven out
+    roll.roll_dice();
+    REQUIRE(pointPhase.get_outcome(roll) == RollOutcome::seven_out);
+
+    // Test no point
+    roll.roll_dice();
+    REQUIRE(pointPhase.get_outcome(roll) == RollOutcome::nopoint);
+}
