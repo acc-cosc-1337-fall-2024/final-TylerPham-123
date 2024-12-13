@@ -33,3 +33,18 @@ TEST_CASE("RollTest, RollInRange")
         REQUIRE(roll_value <= 12);
     }
 }
+
+#include "shooter.h"
+
+TEST_CASE("ShooterTest, ThrowDice") {
+    Die die1, die2;
+    Shooter shooter(die1, die2);
+
+    for (int i = 0; i < 10; ++i) {
+        Roll* roll = shooter.throw_dice();
+        int rollValue = roll->roll_value();
+        REQUIRE(rollValue >= 2);
+        REQUIRE(rollValue <= 12);
+        delete roll;
+    }
+}
